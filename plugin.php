@@ -5,12 +5,12 @@
  * Version: 0.1
  * Author: Paul V. Biron/Sparrow Hawk Computing
  * Author URI: http://sparrowhawkcomputing.com/
- * Plugin URI: https://github.com/pbiron/WordPress-Exporter-extension
+ * Plugin URI: https://github.com/pbiron/wordpress-exporter-v2-extension
  */
 
 /*
  * This plugin is intended to be used in conjunction is
- * http://github.com/pbiron/WordPress-Exporter.
+ * http://github.com/pbiron/wordpress-exporter-v2.
  *
  * It demonstrates how plugins can extend an export in various ways:
  *
@@ -28,7 +28,7 @@
  *
  * This action is in the standard exporter.  However, the necessary hooks to do
  * ANYTHING with these export filters is not.  Those necessary hooks are in
- * http://github.com/pbiron/WordPress-Exporter and are taken advantage of in
+ * http://github.com/pbiron/wordpress-exporter-v2 and are taken advantage of in
  * this plugin.
  */
 add_action( 'export_filters', function () {
@@ -113,7 +113,7 @@ add_action( 'admin_head', function () {
  *
  * This filter is in the standard exporter.  However, the necessary hooks to do
  * ANYTHING with these export filters is not.  Those necessary hooks are in
- * http://github.com/pbiron/WordPress-Exporter and are taken advantage of in
+ * http://github.com/pbiron/wordpress-exporter-v2 and are taken advantage of in
  * this plugin.
  */
 add_filter( 'export_args', function( $args ) {
@@ -172,8 +172,8 @@ add_filter( 'wxr_export_plugins', function ( $plugins ) {
 	$plugins[] = array(
 		'prefix' => 'shc',
 		'namespaceURI' => 'http://sparrowhawkcomputing.com/shc/',
-		'slug' => 'WordPress-Exporter-extension/WordPress-Exporter-extension.php',
-		'url' => 'https://github.com/pbiron/WordPress-Exporter-extension',
+		'slug' => 'wordpress-exporter-v2-extension/wordpress-exporter-v2-extension.php',
+		'url' => 'https://github.com/pbiron/wordpress-exporter-v2-extension',
 		);
 
 	// this is just to demonstrate that we'll get notified via
@@ -183,8 +183,8 @@ add_filter( 'wxr_export_plugins', function ( $plugins ) {
 	$plugins[] = array(
 		'prefix' => 'wxr',
 		'namespaceURI' => 'http://sparrowhawkcomputing.com/wxr/',
-		'slug' => 'WordPress-Exporter-extension/WordPress-Exporter-extension.php',
-		'url' => 'https://github.com/pbiron/WordPress-Exporter-extension',
+		'slug' => 'wordpress-exporter-v2-extension/wordpress-exporter-v2-extension.php',
+		'url' => 'https://github.com/pbiron/wordpress-exporter-v2-extension',
 	);
 
 	// this is just to demonstrate that we'll get notified AGAIN via
@@ -194,8 +194,8 @@ add_filter( 'wxr_export_plugins', function ( $plugins ) {
 	$plugins[] = array(
 		'prefix' => 'wxr',
 		'namespaceURI' => 'http://sparrowhawkcomputing.com/wxr/foo/',
-		'slug' => 'WordPress-Exporter-extension/WordPress-Exporter-extension.php',
-		'url' => 'https://github.com/pbiron/WordPress-Exporter-extension',
+		'slug' => 'wordpress-exporter-v2-extension/plugin.php',
+		'url' => 'https://github.com/pbiron/wordpress-exporter-v2-extension',
 	);
 
 	return $plugins;

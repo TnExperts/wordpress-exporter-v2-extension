@@ -11,15 +11,15 @@ can take advantage of the hooks provided in [WordPress Exporter Redux][] that ar
 the standard exporter.
 
 [WordPress Importer]: https://wordpress.org/plugins/wordpress-importer/
-[WordPress Importer Redux]: https://github.com/pbiron/WordPress-Importer
-[WordPress Exporter Redux]: https://github.com/pbiron/WordPress-Exporter
-[WordPress Exporter Redux: Issues]: https://github.com/pbiron/WordPress-Exporter/issues
+[WordPress Importer Redux]: https://github.com/pbiron/wordpress-importer-v2
+[WordPress Exporter Redux]: https://github.com/pbiron/wordpress-exporter-v2
+[WordPress Exporter Redux: Issues]: https://github.com/pbiron/wordpress-exporter-v2/issues
 [WXR 1.3-proposed]: https://github.com/pbiron/wxr/1.3-proposed
 
 ## How do I use it?
 
 1. Install and activate the [WordPress Exporter Redux][] plugin.
-2. Install this plugin directly from GitHub. ([Download as a ZIP](https://github.com/pbiron/WordPress-Exporter-extension/archive/master.zip))
+2. Install this plugin directly from GitHub. ([Download as a ZIP](archive/master.zip))
 3. Activate this plugin
 4. Head to Tools
 5. Select "Export (v2)"
