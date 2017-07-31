@@ -2,10 +2,11 @@
 /*
  * Plugin Name: WordPress Exporter v2 Extension
  * Description: Demonstrates how a plugin can extend an export
- * Version: 0.1
+ * Version: 0.2
  * Author: Paul V. Biron/Sparrow Hawk Computing
  * Author URI: http://sparrowhawkcomputing.com/
  * Plugin URI: https://github.com/pbiron/wordpress-exporter-v2-extension
+ * GitHub Plugin URI: https://github.com/pbiron/wordpress-exporter-v2-extension
  */
 
 /*
