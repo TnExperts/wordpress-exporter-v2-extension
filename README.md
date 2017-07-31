@@ -27,6 +27,11 @@ the standard exporter.
 
 ## Change Log
 
+### 0.2
+
+* Now uses WP_XMLWriter
+* Rewrote as a class (instead of using anonymous funcs)
+
 ### 0.1
 
 * Init commit
