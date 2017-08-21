@@ -59,7 +59,7 @@ class SHC_WXR_Extension {
 
 		// output extension markup for various objects
 		add_action( 'wxr_export_user', array( $this, 'user_extension_markup' ), 10, 2 );
-		//		add_filter( 'wxr_export_skip_usermeta', array( __CLASS__, 'skip_usermeta' ), 10, 3 );
+		add_filter( 'wxr_export_skip_usermeta', array( __CLASS__, 'skip_usermeta' ), 10, 3 );
 		add_action( 'wxr_export_term', array( $this, 'term_extension_markup' ), 10, 2 );
 		add_action( 'wxr_export_post', array( $this, 'post_extension_markup' ), 10, 2 );
 		add_action( 'wxr_export_comment', array( $this, 'comment_extension_markup' ), 10, 2 );
