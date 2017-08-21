@@ -86,50 +86,54 @@ class SHC_WXR_Extension {
 	 *
 	 * without exporting any posts
 	 *
-	 * The action this is hooked into is in the standard exporter.  However, the
+	 * The action this is hooked into in the standard exporter.  However, the
 	 * necessary hooks to do ANYTHING with these export filters is not.  Those
 	 * necessary hooks are in http://github.com/pbiron/wordpress-exporter-v2 and
 	 * are taken advantage of in this plugin.
 	 */
 	static function render_filters() {
  ?>
- 	<p><label><input type="radio" name="content" value="taxonomies"> Taxonomies</label></p>
-	<ul id="taxonomies-filters" class="export-filters" style="display: none;">
-		<li>
-			<fieldset>
-			<?php
-			foreach ( get_taxonomies( array(), 'objects') as $tax ) {
-			 ?>
-			<label class="label-responsive">
-				<input name="taxonomies[]" id="taxonomies-<?php echo $tax->name ?>" type='checkbox' value='<?php echo $tax->name ?>'>
-			 	<?php echo $tax->labels->name ?>
-			 	<br />
-			 </label>
-			<?php
-			}
-			 ?>
-			</fieldset>
-		</li>
-	</ul>
- 	<p><label><input type="radio" name="content" value="users"> Users</label></p>
-	<ul id="users-filters" class="export-filters" style="display: none;">
-		<li>
-			<fieldset>
-			<?php
-			// a "real" plugin would probably also want to have dropdowns for roles, etc
-			foreach ( get_users() as $user ) {
-			 ?>
-			<label class="label-responsive">
-				<input name="users[]" id="users-<?php echo $user->ID ?>" type='checkbox' value='<?php echo $user->ID ?>'>
-			 	<?php echo $user->display_name ?>
-			 	<br />
-			 </label>
-			<?php
-			}
-			 ?>
-			</fieldset>
-		</li>
-	</ul>
+ 	<fieldset>
+	 	<p><label><input type="radio" name="content" value="extension-taxonomies"> Taxonomies</label></p>
+		<ul id="extension-taxonomies-filters" class="export-filters" style="display: none;">
+			<li>
+				<fieldset>
+				<?php
+				foreach ( get_taxonomies( array(), 'objects') as $tax ) {
+				 ?>
+				<label class="label-responsive">
+					<input name="extension-taxonomies[]" id="taxonomies-<?php echo $tax->name ?>" type='checkbox' value='<?php echo $tax->name ?>'>
+				 	<?php echo $tax->labels->name ?>
+				 	<br />
+				 </label>
+				<?php
+				}
+				 ?>
+				</fieldset>
+			</li>
+		</ul>
+	</fieldset>
+	<fieldset>
+	 	<p><label><input type="radio" name="content" value="extension-users"> Users</label></p>
+		<ul id="extension-users-filters" class="export-filters" style="display: none;">
+			<li>
+				<fieldset>
+				<?php
+				// a "real" plugin would probably also want to have dropdowns for roles, etc
+				foreach ( get_users() as $user ) {
+				 ?>
+				<label class="label-responsive">
+					<input name="extension-users[]" id="users-<?php echo $user->ID ?>" type='checkbox' value='<?php echo $user->ID ?>'>
+				 	<?php echo $user->display_name ?>
+				 	<br />
+				 </label>
+				<?php
+				}
+				 ?>
+				</fieldset>
+			</li>
+		</ul>
+	</fieldset>
 <?php
 	}
 
@@ -168,7 +172,7 @@ class SHC_WXR_Extension {
 	}
 
 	/**
-	 * Filter the export args, so export_wp() can understand the export filters we added
+	 * Filter the export args, so the exporter can understand the export filters we added
 	 * by hooking into 'export_filters' above.
 	 *
 	 * @param array $args
@@ -180,11 +184,11 @@ class SHC_WXR_Extension {
 	 * this plugin.
 	 */
 	static function export_args( $args ) {
-		if ( 'taxonomies' === $args['content'] ) {
-			$args['taxonomies'] = $_GET['taxonomies'];
+		if ( 'extension-taxonomies' === $args['content'] ) {
+			$args['extension-taxonomies'] = $_REQUEST['extension-taxonomies'];
 		}
-		elseif ( 'users' === $args['content'] ) {
-			$args['users'] = $_GET['users'];
+		elseif ( 'extension-users' === $args['content'] ) {
+			$args['extension-users'] = array_map( 'intval', $_REQUEST['extension-users'] );
 		}
 
 		return $args;
@@ -198,8 +202,8 @@ class SHC_WXR_Extension {
 	 * @return array
 	 */
 	static function user_ids( $user_ids, $filters ) {
-		if ( 'users' === $filters['content'] && ! empty( $filters['users'] ) ) {
-			$user_ids = (array) get_users( array( 'include' => $filters['users'], 'fields' => 'ID' ) );
+		if ( 'extension-users' === $filters['content'] && ! empty( $filters['extension-users'] ) ) {
+			$user_ids = (array) get_users( array( 'include' => $filters['extension-users'], 'fields' => 'ID' ) );
 	 	}
 
 	 	return $user_ids;
@@ -213,9 +217,9 @@ class SHC_WXR_Extension {
 	 * @return array
 	 */
 	static function term_ids( $term_ids, $filters ) {
-		if ( 'taxonomies' === $filters['content'] && ! empty( $filters['taxonomies'] ) ) {
+		if ( 'extension-taxonomies' === $filters['content'] && ! empty( $filters['extension-taxonomies'] ) ) {
 			// export terms from the specified taxonomies
-			$term_ids = (array) get_terms( array( 'taxonomy' => $filters['taxonomies'], 'fields' => 'ids', 'hide_empty' => false ) );
+			$term_ids = (array) get_terms( array( 'taxonomy' => $filters['extension-taxonomies'], 'fields' => 'ids', 'hide_empty' => false ) );
 	 	}
 
 	 	return $term_ids;
